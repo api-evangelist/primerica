@@ -1,0 +1,160 @@
+generated: '2026-09-14'
+method: probed
+source: >-
+  https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration,
+  https://login.my.primerica.com/.well-known/openid-configuration,
+  https://login.primericaonline.com/.well-known/openid-configuration,
+  https://gtw.primericaonline.com/.well-known/openid-configuration,
+  https://gtw.primericaonline.com/prod/exp/client/login-bff/v1/oidc/.well-known/openid-configuration,
+  https://www.primerica.com/public/primerica-client-portals.html
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: Primerica
+providerId: primerica
+description: >-
+  Primerica publishes no developer-facing API and no authentication documentation for third parties.
+  It does, however, serve real anonymous OAuth 2.0 / OpenID Connect provider metadata for the identity
+  systems behind its own first-party applications, and the MyPrimerica client portal ships its runtime
+  OAuth client configuration as a public JavaScript file. This profile is derived entirely from those
+  published discovery documents — it describes how Primerica's own apps authenticate, NOT a partner or
+  public API programme, which does not exist.
+notes: >-
+  Nothing here is a credential and nothing here is obtainable by a third party. There is no public
+  client registration, no developer signup, and no published partner onboarding path. Dynamic client
+  registration endpoints are advertised in the metadata but are Okta/Layer7 platform defaults, not an
+  open registration offer.
+authorization_servers:
+  - id: myprimerica-client-portal
+    name: MyPrimerica client portal authorization server
+    issuer: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697
+    platform: Okta (custom domain login.my.primerica.com -> myprimerica.customdomains.okta.com)
+    discovery: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration
+    artifact: well-known/primerica-login-my-clientportal-openid-configuration.json
+    serves: https://my.primerica.com/app/v1/ (MyPrimerica policy, investment and account portal)
+    authorization_endpoint: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/authorize
+    token_endpoint: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/token
+    introspection_endpoint: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/introspect
+    revocation_endpoint: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/revoke
+    end_session_endpoint: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/logout
+    jwks_uri: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/keys
+    device_authorization_endpoint: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/device/authorize
+    grant_types_supported:
+      - authorization_code
+      - implicit
+      - refresh_token
+      - password
+      - urn:ietf:params:oauth:grant-type:device_code
+      - urn:openid:params:grant-type:ciba
+    pkce:
+      supported: true
+      code_challenge_methods: [S256]
+    dpop_signing_alg_values_supported: [RS256, RS384, RS512, ES256, ES384, ES512]
+    token_endpoint_auth_methods_supported:
+      - client_secret_basic
+      - client_secret_post
+      - client_secret_jwt
+      - private_key_jwt
+      - none
+    observed_public_client:
+      client_id: 0oa8qisqnhShOMbhR697
+      note: >-
+        Public (PKCE, no secret) SPA client id published by Primerica in its own client-portal
+        directory page and in the MyPrimerica runtime config. Not a credential.
+      requested_scope: openid profile email offline_access client-portal:write cm.readonly
+  - id: okta-org-myprimerica
+    name: MyPrimerica Okta org authorization server
+    issuer: https://login.my.primerica.com
+    platform: Okta
+    discovery: https://login.my.primerica.com/.well-known/openid-configuration
+    artifact: well-known/primerica-login-my-openid-configuration.json
+    scopes_supported: [openid, email, profile, address, phone, offline_access, groups]
+    pkce:
+      supported: true
+      code_challenge_methods: [S256]
+  - id: okta-org-pol
+    name: Primerica Online (representative portal) Okta org authorization server
+    issuer: https://login.primericaonline.com
+    platform: Okta (custom domain -> primericaonline.customdomains.okta.com)
+    discovery: https://login.primericaonline.com/.well-known/openid-configuration
+    artifact: well-known/primerica-login-pol-openid-configuration.json
+    serves: >-
+      https://www.primericaonline.com/ — the POL representative portal, which SAML-redirects into this
+      org (SAMLRequest to /app/primericaonline_polapp_1/.../sso/saml)
+    federation: SAML 2.0 SSO in addition to OIDC
+  - id: layer7-gateway
+    name: Primerica API gateway OAuth/OIDC provider
+    issuer: https://gtw.primericaonline.com
+    platform: Broadcom / CA Layer7 API Gateway
+    discovery: https://gtw.primericaonline.com/.well-known/openid-configuration
+    artifact: well-known/primerica-gtw-openid-configuration.json
+    authorization_endpoint: https://gtw.primericaonline.com:8443/auth/oauth/v2/authorize
+    token_endpoint: https://gtw.primericaonline.com:8443/auth/oauth/v2/token
+    pushed_authorization_request_endpoint: https://gtw.primericaonline.com:8443/auth/oauth/v2/par
+    backchannel_authentication_endpoint: https://gtw.primericaonline.com:8443/auth/oauth/v2/bc-authorize
+    jwks_uri: https://gtw.primericaonline.com:8443/openid/connect/jwks.json
+    scopes_supported: [openid, email, profile, openid_client_registration]
+    grant_types_supported:
+      - authorization_code
+      - implicit
+      - refresh_token
+      - password
+      - client_credentials
+      - urn:ietf:params:oauth:grant-type:jwt-bearer
+      - urn:ietf:params:oauth:grant-type:saml2-bearer
+      - urn:ietf:params:oauth:grant-type:token-exchange
+      - urn:ietf:params:oauth:grant-type:device_code
+      - urn:openid:params:grant-type:ciba
+    token_endpoint_auth_methods_supported:
+      - client_secret_basic
+      - client_secret_post
+      - client_secret_jwt
+      - private_key_jwt
+      - tls_client_auth
+      - self_signed_tls_client_auth
+    mtls:
+      supported: true
+      certificate_bound_access_tokens: true
+    service_documentation:
+      url: https://gtw.primericaonline.com:8443/apidocs/auth/oauth/v2/swagger
+      status: unreachable
+      note: >-
+        Primerica's own OIDC metadata advertises a Swagger document for the gateway OAuth service, but
+        port 8443 does not accept connections from the public internet (probe 2026-09-14 timed out).
+        The one API description Primerica points at is therefore not publicly retrievable. This is the
+        single highest-value thing the provider could change: exposing that Swagger, or publishing it
+        on 443, would give the gateway a real machine-readable contract.
+  - id: layer7-login-bff
+    name: Client login BFF OIDC provider
+    issuer: https://gtw.primericaonline.com/prod/exp/client/login-bff/v1/oidc
+    platform: Broadcom / CA Layer7 API Gateway (backend-for-frontend)
+    discovery: https://gtw.primericaonline.com/prod/exp/client/login-bff/v1/oidc/.well-known/openid-configuration
+    artifact: well-known/primerica-gtw-login-bff-openid-configuration.json
+    scopes_supported: [openid, email, profile]
+    grant_types_supported: [authorization_code, implicit, refresh_token]
+    claims_supported: [sub, lastLogin, dcGroups, name, title, userid, email]
+schemes:
+  - type: openIdConnect
+    name: OpenID Connect
+    applies_to: first-party Primerica applications only
+    openIdConnectUrl: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration
+  - type: oauth2
+    name: OAuth 2.0 authorization code with PKCE
+    applies_to: MyPrimerica client portal SPA
+    flows:
+      authorizationCode:
+        authorizationUrl: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/authorize
+        tokenUrl: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/token
+        refreshUrl: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/v1/token
+  - type: mutualTLS
+    name: mTLS client authentication with certificate-bound access tokens
+    applies_to: gtw.primericaonline.com gateway OAuth provider
+third_party_access:
+  public_api: false
+  self_service_signup: false
+  documented_partner_onboarding: false
+  note: >-
+    No public or partner API programme is documented anywhere on Primerica's public surface. Every
+    endpoint above exists to authenticate Primerica's own customers and representatives.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

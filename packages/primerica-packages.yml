@@ -1,0 +1,40 @@
+generated: '2026-09-14'
+method: searched
+source: >-
+  https://registry.npmjs.org/-/v1/search?text=primerica, https://pypi.org/pypi/primerica/json,
+  https://rubygems.org/api/v1/search.json?query=primerica, https://crates.io/api/v1/crates?q=primerica,
+  https://api.github.com/orgs/Primerica/repos
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Primerica
+providerId: primerica
+description: >-
+  Primerica publishes no client libraries. Every public package registry was queried unauthenticated on
+  2026-09-14 and returned zero results for "primerica"; the github.com/Primerica organization exists but
+  has zero public repositories.
+package_count: 0
+packages: []
+registries_searched:
+  - registry: npm
+    query: primerica
+    results: 0
+  - registry: pypi
+    query: primerica
+    results: 0
+    http_status: 404
+  - registry: rubygems
+    query: primerica
+    results: 0
+  - registry: crates.io
+    query: primerica
+    results: 0
+  - registry: github
+    query: orgs/Primerica/repos
+    results: 0
+    note: Organization page returns HTTP 200 with no public repositories.
+notes: >-
+  There is no API to wrap, so the absence of SDKs is consistent rather than a decay signal. No `SDKs`
+  pointer is emitted in apis.yml — an SDK pointer over an empty package list would be a false claim.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

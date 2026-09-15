@@ -4,32 +4,30 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Primerica
 providerId: primerica
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-14'
+generated: '2026-09-14'
+method: searched
+source: >-
+  https://www.primerica.com/sitemap.xml, probes of https://gtw.primericaonline.com/ and
+  https://login.my.primerica.com/.well-known/openid-configuration (2026-09-14)
+reconciled: true
 tags:
   - Insurance
   - Financial Services
   - Life Insurance
   - Rate Limiting
-description: Primerica does not publish a developer-facing API or rate-limit documentation. Any throttling
-  is governed by partner contracts and is not visible publicly.
-notes: No public rate-limit documentation. Contract-defined limits only.
-sources:
-  - https://www.primerica.com/
-responseCodes:
-  throttled: 429
-limits:
-  - name: Contract-defined limits
-    scope: contract
-    metric: varies
-    limit: 'see partner agreement'
-policies:
-  - name: Contract Governance
-    description: Throughput, concurrency, and quota are negotiated in the partner integration contract.
-      Operational behavior, retry, and escalation paths are documented per integration.
+limit_count: 0
+limits: []
+description: >-
+  Primerica documents no rate limits. There is no developer portal or API reference in which to publish
+  them, and no unauthenticated endpoint on which a limit could be observed.
+headers_observed: []
+notes: >-
+  Responses from the anonymous OIDC discovery endpoints on login.my.primerica.com,
+  login.primericaonline.com and gtw.primericaonline.com carried no X-RateLimit-*, RateLimit-* or
+  Retry-After headers on 2026-09-14. No 429 behaviour is documented anywhere. The previous version of
+  this file asserted "contract-defined limits" governed by partner agreements; no such partner agreement
+  or programme is published, so that claim has been withdrawn and replaced with a measured zero.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

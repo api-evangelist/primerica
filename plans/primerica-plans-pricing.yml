@@ -4,43 +4,30 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Primerica
 providerId: primerica
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-14'
+generated: '2026-09-14'
+method: searched
+source: >-
+  https://www.primerica.com/sitemap.xml (1,899 URLs, no pricing or developer page),
+  https://www.primerica.com/public/primerica-client-portals.html,
+  https://developer.primerica.com (NXDOMAIN)
+reconciled: true
 tags:
   - Insurance
   - Financial Services
   - Life Insurance
-description: Primerica is a life-insurance and financial-services company that distributes products
-  through a captive sales force. There is no public developer portal, no published API pricing, and no
-  self-service plan structure. Any system integration is partner / B2B and negotiated under a contract.
-notes: No public developer portal or API pricing page exists. Reconciliation reduced the scaffold to
-  a single Contact Sales plan; do not infer tier prices or quotas.
-sources:
-  - https://www.primerica.com/
-plans:
-  - id: primerica-contact-sales
-    name: Contact Sales
-    type: enterprise
-    description: Partner / B2B integration negotiated directly with Primerica. Pricing, quotas, and SLA
-      are contractual and not published.
-    entries:
-      - label: Negotiated Access
-        name: negotiated_access
-        type: flat
-        metric: varies
-        limit: -1
-        timeFrame: usage
-        geo: US
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Contractual SLA
-      - name: Partner Onboarding
-      - name: Account Management
+plan_count: 0
+plans: []
+description: >-
+  Primerica publishes no API plans, tiers or pricing of any kind. It has no developer portal and no
+  public or partner API programme, so there is nothing to price. Its entire sitemap was searched on
+  2026-09-14 and contains no developer, API or API-pricing page.
+notes: >-
+  A previous round of this profile carried a single synthetic "Contact Sales" plan written by the
+  2026-05-04 bulk sweep. Primerica does not in fact publish a contact-sales path for API access either,
+  so that plan asserted more than the evidence supports and has been removed in favour of an honest
+  plan_count of 0. Consumer product pricing (term life premiums, fund fees) exists but is quoted per
+  applicant by a licensed representative and is not an API plan.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

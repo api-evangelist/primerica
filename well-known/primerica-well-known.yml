@@ -1,0 +1,217 @@
+generated: '2026-09-14'
+method: probed
+source: live anonymous HTTPS probes of every Primerica-controlled host named in apis.yml, in the
+  MyPrimerica client-portal runtime configuration (https://my.primerica.com/app/v1/63b8c61ec904c8b1eb353e57c06528a41561f79f-config.js)
+  and in the public client-portal directory (https://www.primerica.com/public/primerica-client-portals.html)
+specification: API Evangelist Well-Known Probe
+specificationVersion: '0.1'
+provider: Primerica
+providerId: primerica
+description: >-
+  Primerica publishes no security.txt, api-catalog, ai-plugin.json or A2A agent card on any host we can
+  reach. It DOES serve real, anonymous OAuth 2.0 / OpenID Connect discovery documents on three
+  first-party hosts: two Okta custom-domain identity orgs (login.my.primerica.com for the MyPrimerica
+  client portal, login.primericaonline.com for the Primerica Online representative portal) and its own
+  Broadcom/CA Layer7 API gateway (gtw.primericaonline.com). Those eight documents are the only
+  machine-readable API artifacts Primerica publishes to the open internet.
+notes: >-
+  www.primerica.com answers HTTP 200 with a 97-byte "There was an error processing your request" body
+  for every /.well-known/* path — a soft-200 catch-all, not a served document, and recorded as a miss.
+  The apex primerica.com 302-redirects every path to www. developer.primerica.com and api.primerica.com,
+  which a previous round of this profile recorded as the developer portal and API base, do not resolve
+  at all (NXDOMAIN) and have been removed from apis.yml.
+hosts:
+  - host: www.primerica.com
+    note: soft-200 catch-all; every path returns the same 97-byte error page. All misses.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        note: HTML error page, not a document — counted as a miss
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        note: HTML error page, not a document — counted as a miss
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        note: HTML error page, not a document — counted as a miss
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        note: HTML error page, not a document — counted as a miss
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        note: HTML error page, not a document — counted as a miss
+  - host: primerica.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 302
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 302
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+        file: null
+      - path: /.well-known/api-catalog
+        status: 302
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 302
+        file: null
+  - host: login.my.primerica.com
+    note: >-
+      Okta custom domain (CNAME myprimerica.customdomains.okta.com) operating identity for the
+      MyPrimerica client portal. Both the org-level and the client-portal custom authorization server
+      metadata are served anonymously.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: primerica-login-my-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: primerica-login-my-oauth-authorization-server.json
+      - path: /oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration
+        status: 200
+        file: primerica-login-my-clientportal-openid-configuration.json
+      - path: /oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/oauth-authorization-server
+        status: 200
+        file: primerica-login-my-clientportal-oauth-authorization-server.json
+      - path: /.well-known/security.txt
+        status: 405
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: login.primericaonline.com
+    note: >-
+      Okta custom domain (CNAME primericaonline.customdomains.okta.com) operating identity for the
+      Primerica Online (POL) representative portal; www.primericaonline.com SAML-redirects into it.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: primerica-login-pol-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: primerica-login-pol-oauth-authorization-server.json
+      - path: /.well-known/security.txt
+        status: 405
+        file: null
+      - path: /.well-known/api-catalog
+        status: 405
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: gtw.primericaonline.com
+    note: >-
+      Primerica's own API gateway (Broadcom/CA Layer7 — unmatched paths return a SOAP
+      "Policy Falsified" fault in the http://www.layer7tech.com/ws/policy/fault namespace). It serves
+      OIDC provider metadata at the root and a second, separate issuer for the client login BFF.
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: primerica-gtw-openid-configuration.json
+      - path: /prod/exp/client/login-bff/v1/oidc/.well-known/openid-configuration
+        status: 200
+        file: primerica-gtw-login-bff-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 500
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 500
+        file: null
+      - path: /.well-known/security.txt
+        status: 500
+        file: null
+      - path: /.well-known/api-catalog
+        status: 500
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 500
+        file: null
+      - path: /.well-known/agent.json
+        status: 500
+        file: null
+  - host: my.primerica.com
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: www.primericaonline.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: investors.primerica.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: shareholder.primerica.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: developer.primerica.com
+    note: NXDOMAIN — does not resolve. Recorded in a prior round as the developer portal; it does not exist.
+    documents:
+      - path: /
+        status: 0
+        file: null
+  - host: api.primerica.com
+    note: NXDOMAIN — does not resolve. Recorded in a prior round as the API base URL; it does not exist.
+    documents:
+      - path: /
+        status: 0
+        file: null
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

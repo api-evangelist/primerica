@@ -1,0 +1,89 @@
+generated: '2026-09-14'
+method: probed
+source: >-
+  https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration,
+  https://login.my.primerica.com/.well-known/openid-configuration,
+  https://login.primericaonline.com/.well-known/openid-configuration,
+  https://gtw.primericaonline.com/.well-known/openid-configuration,
+  https://www.primerica.com/public/primerica-client-portals.html (published authorize URL)
+specification: API Commons OAuth Scopes
+specificationVersion: '0.1'
+provider: Primerica
+providerId: primerica
+description: >-
+  OAuth 2.0 / OIDC scopes Primerica's own authorization servers advertise in their anonymous discovery
+  documents, plus the two application scopes Primerica publishes in the MyPrimerica authorize URL on its
+  public client-portal page. There is no published scope reference for third parties because there is no
+  third-party API programme.
+docs: null
+notes: >-
+  `client-portal:write` and `cm.readonly` are the only Primerica-authored (non-platform-default) scopes
+  visible on the public surface. Everything else in scopes_supported is an Okta or Layer7 platform
+  default. Descriptions below are recorded only where Primerica or the standard defines them; no
+  description has been invented.
+scope_count: 8
+scopes:
+  - name: openid
+    server: myprimerica-client-portal
+    standard: OpenID Connect Core 1.0
+    description: Requests an ID token; required for OIDC.
+  - name: profile
+    server: myprimerica-client-portal
+    standard: OpenID Connect Core 1.0
+    description: Standard OIDC profile claims.
+  - name: email
+    server: myprimerica-client-portal
+    standard: OpenID Connect Core 1.0
+    description: Standard OIDC email and email_verified claims.
+  - name: offline_access
+    server: myprimerica-client-portal
+    standard: OpenID Connect Core 1.0
+    description: Requests a refresh token.
+  - name: client-portal:write
+    server: myprimerica-client-portal
+    standard: null
+    first_party: true
+    description: >-
+      Primerica-defined application scope requested by the MyPrimerica SPA. Write access to the client
+      portal surface. No published definition — recorded verbatim from the authorize URL Primerica
+      publishes at https://www.primerica.com/public/primerica-client-portals.html
+  - name: cm.readonly
+    server: myprimerica-client-portal
+    standard: null
+    first_party: true
+    description: >-
+      Primerica-defined application scope requested by the MyPrimerica SPA alongside the `cm` BFF
+      endpoint (https://gtw.primericaonline.com/prod/exp/pc2/bff). Read-only. No published definition.
+  - name: device_sso
+    server: myprimerica-client-portal
+    standard: Okta platform default
+    description: Okta device single sign-on.
+  - name: openid_client_registration
+    server: layer7-gateway
+    standard: Layer7 OAuth Toolkit default
+    description: Dynamic client registration scope advertised by the gateway OIDC provider.
+platform_default_scopes:
+  note: >-
+    The client-portal authorization server also advertises the full Okta `okta.myAccount.*` scope family
+    (16 scopes) and the org server advertises address, phone and groups. These are Okta platform
+    defaults, not Primerica product scopes, and are not counted above.
+  okta_myaccount:
+    - okta.myAccount.read
+    - okta.myAccount.manage
+    - okta.myAccount.profile.read
+    - okta.myAccount.profile.manage
+    - okta.myAccount.email.read
+    - okta.myAccount.email.manage
+    - okta.myAccount.phone.read
+    - okta.myAccount.phone.manage
+    - okta.myAccount.authenticators.read
+    - okta.myAccount.authenticators.manage
+    - okta.myAccount.appAuthenticator.read
+    - okta.myAccount.appAuthenticator.manage
+    - okta.myAccount.appAuthenticator.maintenance.read
+    - okta.myAccount.appAuthenticator.maintenance.manage
+    - okta.myAccount.oktaApplications.read
+    - okta.myAccount.organization.read
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

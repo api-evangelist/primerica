@@ -1,0 +1,126 @@
+generated: '2026-09-14'
+method: probed
+source: >-
+  well-known/primerica-login-my-clientportal-openid-configuration.json,
+  well-known/primerica-gtw-openid-configuration.json,
+  well-known/primerica-login-pol-openid-configuration.json,
+  https://www.primerica.com/public/privacy/primerica-responsible-disclosure-practice.html
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Primerica
+providerId: primerica
+description: >-
+  Cross-cutting standards Primerica's public surface actually demonstrates. Every `conforms: true` below
+  is evidenced by a document Primerica serves anonymously; every `false` means we probed and found
+  nothing, not that we did not look.
+notes: >-
+  Primerica publishes no OpenAPI, AsyncAPI, GraphQL SDL, WSDL or Protobuf contract on any reachable
+  host, so none of the contract-shaped standards can be asserted. There is no domain-standard signature
+  to record either: no ACORD message shapes, no FDX/PSD2 surface, no SCIM URNs and no OData $metadata
+  appear anywhere on the public surface, and this pipeline does not invent one to fill the slot.
+conformance:
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration
+    note: Authorization code, refresh token, device code and CIBA grants advertised.
+  - id: oidc
+    name: OpenID Connect Core 1.0 + Discovery 1.0
+    conforms: true
+    evidence: https://login.my.primerica.com/.well-known/openid-configuration
+    note: >-
+      Four separate issuers publish conformant OIDC provider metadata anonymously
+      (two Okta orgs, the Layer7 gateway root, and the client login BFF).
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+    conforms: true
+    evidence: https://login.primericaonline.com/.well-known/oauth-authorization-server
+  - id: rfc7636
+    name: PKCE (RFC 7636)
+    conforms: true
+    evidence: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration
+    note: code_challenge_methods_supported = [S256]; the MyPrimerica SPA uses S256 in its published authorize URL.
+  - id: rfc9126
+    name: Pushed Authorization Requests (RFC 9126)
+    conforms: true
+    evidence: https://gtw.primericaonline.com/.well-known/openid-configuration
+    note: pushed_authorization_request_endpoint advertised by the Layer7 gateway provider.
+  - id: rfc8705
+    name: OAuth 2.0 mutual-TLS client authentication and certificate-bound access tokens (RFC 8705)
+    conforms: true
+    evidence: https://gtw.primericaonline.com/.well-known/openid-configuration
+    note: tls_client_auth + self_signed_tls_client_auth, tls_client_certificate_bound_access_tokens = true.
+  - id: rfc8693
+    name: OAuth 2.0 Token Exchange (RFC 8693)
+    conforms: true
+    evidence: https://gtw.primericaonline.com/.well-known/openid-configuration
+  - id: rfc9449
+    name: DPoP — Demonstrating Proof of Possession (RFC 9449)
+    conforms: true
+    evidence: https://login.my.primerica.com/oauth2/aus8qhl8ufh9Bx3Dn697/.well-known/openid-configuration
+    note: dpop_signing_alg_values_supported advertised on the client-portal authorization server.
+  - id: saml2
+    name: SAML 2.0 Web Browser SSO
+    conforms: true
+    evidence: https://www.primericaonline.com/
+    note: >-
+      The POL representative portal issues a SAMLRequest to
+      login.primericaonline.com/app/primericaonline_polapp_1/.../sso/saml on unauthenticated load.
+  - id: rfc9116
+    name: security.txt (RFC 9116)
+    conforms: false
+    evidence: https://www.primerica.com/.well-known/security.txt
+    note: >-
+      Soft-200 catch-all error page, not a security.txt. Primerica DOES publish a responsible disclosure
+      policy as an HTML page (see security/primerica-vulnerability-disclosure.yml) — putting its contact
+      into a /.well-known/security.txt would be a one-file fix.
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: https://gtw.primericaonline.com/openapi.json
+    note: >-
+      500 SOAP "Policy Falsified" fault. The only Swagger Primerica points at
+      (https://gtw.primericaonline.com:8443/apidocs/auth/oauth/v2/swagger, named in its own OIDC
+      metadata) sits on a port that is not reachable from the public internet.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: https://www.primerica.com/.well-known/api-catalog
+    note: No event, streaming or webhook surface is published.
+  - id: rfc9457
+    name: Problem Details for HTTP APIs (RFC 9457)
+    conforms: false
+    evidence: https://gtw.primericaonline.com/openapi.json
+    note: >-
+      The gateway returns SOAP 1.1 faults (layer7tech policy fault namespace) for unmatched requests,
+      not application/problem+json.
+  - id: rfc8615
+    name: Well-Known URIs — /.well-known/api-catalog (RFC 9727)
+    conforms: false
+    evidence: https://www.primerica.com/.well-known/api-catalog
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: https://login.primericaonline.com/.well-known/agent-card.json
+    note: 404 on every host probed; /.well-known/agent.json likewise.
+domain_standards:
+  probed:
+    - id: acord
+      name: ACORD (insurance data and messaging standards)
+      conforms: false
+      evidence: https://www.primerica.com/sitemap.xml
+      note: >-
+        Primerica is a term-life and financial-services distributor, so ACORD is the obvious domain
+        standard for its market. No ACORD message type, schema or conformance claim appears anywhere on
+        its public surface. Reward-only check — recorded as an absence, not a penalty.
+    - id: fdx
+      name: Financial Data Exchange (FDX) API
+      conforms: false
+      evidence: https://gtw.primericaonline.com/.well-known/openid-configuration
+      note: >-
+        No FDX endpoints, no /fdx path, no FDX scopes. Third-party account aggregation of Primerica
+        investment accounts is brokered by Pershing/NetXInvestor and Plaid, not by a Primerica-published
+        FDX contract.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

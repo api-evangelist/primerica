@@ -1,0 +1,30 @@
+generated: '2026-09-14'
+method: searched
+source: >-
+  https://registry.npmjs.org/-/v1/search?text=primerica, https://api.github.com/orgs/Primerica/repos,
+  https://www.primerica.com/sitemap.xml, probes of /mcp and /.well-known/* on every Primerica host
+specification: API Evangelist MCP Manifest
+specificationVersion: '0.1'
+provider: Primerica
+providerId: primerica
+description: >-
+  Primerica ships no Model Context Protocol server, hosted or local, and there is no OpenAPI in this
+  repository from which a candidate tool list could be honestly derived. This file records the search,
+  not a product.
+status: absent
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+tools: []
+notes: >-
+  No apis.yml `MCPServer` pointer is emitted. Deriving candidate tools would require a machine-readable
+  contract; the only API description Primerica points at
+  (https://gtw.primericaonline.com:8443/apidocs/auth/oauth/v2/swagger, named in its own OIDC metadata)
+  is on a port unreachable from the public internet.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

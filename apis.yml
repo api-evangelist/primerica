@@ -2,6 +2,7 @@ aid: primerica
 url: https://raw.githubusercontent.com/api-evangelist/primerica/refs/heads/main/apis.yml
 name: Primerica
 type: Index
+position: Producing
 deliveryModel:
   model: unknown
   open_source: false
@@ -14,59 +15,130 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: enterprise
-  onboarding: unknown
+  pricing: none
+  onboarding: closed
   trial: false
   try_now: false
   public: false
-  label: Enterprise
-  confidence: medium
+  label: No public or partner API programme
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - well-known
+  generated: '2026-09-14'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/primerica.png
 tags:
   - Insurance
   - Financial-Services
   - Life Insurance
+  - Identity
+  - Authentication
+  - OAuth
+  - OpenID-Connect
+  - API-Gateway
 tags_raw:
   - Insurance
   - Financial Services
   - Life Insurance
+  - Identity
+  - Authentication
+  - OAuth
+  - OpenID Connect
+  - API Gateway
 description: >-
-  Primerica is a major US corporation and Fortune 1000 company. The Primerica API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+  Primerica, Inc. (NYSE: PRI) is a US and Canadian financial-services company that distributes term life
+  insurance, mutual funds and annuities, mortgages, debt-consolidation, auto and home insurance,
+  pre-paid legal services and identity-theft protection to middle-income households through a large
+  independent sales force. Primerica operates no public or partner API programme: as of 2026-09-14 there
+  is no developer portal, no published OpenAPI, AsyncAPI, GraphQL, WSDL or Protobuf contract, no SDK on
+  any package registry, no MCP server, no status page and no API pricing. What it does publish to the
+  open internet is machine-readable identity infrastructure — anonymous OAuth 2.0 and OpenID Connect
+  discovery documents for the two Okta identity orgs behind the MyPrimerica client portal and the
+  Primerica Online representative portal, and for its own Broadcom/CA Layer7 API gateway at
+  gtw.primericaonline.com — together with a published responsible-disclosure policy.
 created: '2026-04-19'
-modified: '2026-04-19'
+modified: '2026-09-14'
 specificationVersion: '0.23'
 apis:
-  - aid: primerica:primerica-api
-    name: Primerica API
+  - aid: primerica:primerica-api-gateway
+    name: Primerica API Gateway
     tags:
-      - Insurance
-      - Financial-Services
-      - Life Insurance
+      - Identity
+      - Authentication
+      - OAuth
+      - OpenID-Connect
+      - API-Gateway
     tags_raw:
-      - Insurance
-      - Financial Services
-      - Life Insurance
+      - Identity
+      - Authentication
+      - OAuth
+      - OpenID Connect
+      - API Gateway
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.primerica.com
-    humanURL: https://developer.primerica.com
+    baseURL: https://gtw.primericaonline.com
+    humanURL: https://www.primerica.com/public/primerica-client-portals.html
     properties:
-      - url: https://developer.primerica.com/docs
-        type: Documentation
+      - url: authentication/primerica-authentication.yml
+        type: Authentication
+      - url: scopes/primerica-scopes.yml
+        type: OAuthScopes
     description: >-
-      The Primerica API provides access to platform services and data for enterprise integration and automation.
+      Primerica's own API gateway (Broadcom/CA Layer7 — unmatched paths return a SOAP "Policy Falsified"
+      fault in the layer7tech policy-fault namespace). It fronts the backend-for-frontend routes used by
+      the MyPrimerica client portal, including /prod/exp/pc2/bff and the client login BFF OIDC issuer at
+      /prod/exp/client/login-bff/v1/oidc. It serves conformant OIDC provider metadata anonymously, and
+      that metadata advertises a Swagger description at
+      https://gtw.primericaonline.com:8443/apidocs/auth/oauth/v2/swagger — but port 8443 refuses
+      connections from the public internet, so the one API description Primerica points at cannot be
+      retrieved. Every functional route is credential-gated and undocumented; this is first-party
+      infrastructure, not a product a third party can integrate with.
 common:
-  - type: DomainSecurity
-    url: security/primerica-domain-security.yml
+  - type: Website
+    url: https://www.primerica.com
   - type: GitHubOrganization
     url: https://github.com/Primerica
   - type: LinkedIn
     url: https://www.linkedin.com/company/primerica
-  - type: Website
-    url: https://www.primerica.com
+  - type: Support
+    url: https://www.primerica.com/public/contact.html
+  - type: Blog
+    url: https://www.primerica.com/public/news-insights.html
+  - type: Login
+    url: https://my.primerica.com
+  - type: TermsOfService
+    url: https://www.primerica.com/public/terms_conditions.html
+  - type: PrivacyPolicy
+    url: https://www.primerica.com/public/privacy/privacy_notices.html
+  - type: Security
+    url: https://www.primerica.com/public/privacy/primerica-responsible-disclosure-practice.html
+  - type: VulnerabilityDisclosure
+    url: security/primerica-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/primerica-domain-security.yml
+  - type: WellKnown
+    url: well-known/primerica-well-known.yml
+  - type: Authentication
+    url: authentication/primerica-authentication.yml
+  - type: OAuthScopes
+    url: scopes/primerica-scopes.yml
+  - type: Conformance
+    url: conformance/primerica-conformance.yml
+  - type: LLMsTxt
+    url: llms/primerica-llms.txt
+  - type: Packages
+    url: packages/primerica-packages.yml
+  - type: Plans
+    url: plans/primerica-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/primerica-rate-limits.yml
+  - type: FinOps
+    url: finops/primerica-finops.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-14'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v3
