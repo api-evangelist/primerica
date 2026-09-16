@@ -34,9 +34,8 @@ tags:
   - Life Insurance
   - Identity
   - Authentication
-  - OAuth
-  - OpenID-Connect
-  - API-Gateway
+  - OpenID Connect
+  - API Gateway
 tags_raw:
   - Insurance
   - Financial Services
@@ -66,9 +65,8 @@ apis:
     tags:
       - Identity
       - Authentication
-      - OAuth
-      - OpenID-Connect
-      - API-Gateway
+      - OpenID Connect
+      - API Gateway
     tags_raw:
       - Identity
       - Authentication
