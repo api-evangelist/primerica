@@ -30,11 +30,10 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/primerica.png
 tags:
   - Insurance
-  - Financial-Services
+  - Financial Services
   - Life Insurance
   - Identity
   - Authentication
-  - OpenID Connect
   - API Gateway
 tags_raw:
   - Insurance
@@ -43,8 +42,8 @@ tags_raw:
   - Identity
   - Authentication
   - OAuth
-  - OpenID Connect
   - API Gateway
+  - Financial-Services
 description: >-
   Primerica, Inc. (NYSE: PRI) is a US and Canadian financial-services company that distributes term life
   insurance, mutual funds and annuities, mortgages, debt-consolidation, auto and home insurance,
@@ -140,3 +139,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 16
   pass: local-v3
+x-tags-removed:
+- OpenID Connect
