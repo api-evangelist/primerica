@@ -1,4 +1,4 @@
-# Primerica (primerica)
+# Primerica
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,23 +64,115 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Primerica is a major US corporation and Fortune 1000 company. The Primerica API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+Primerica, Inc. (NYSE: PRI) is a US and Canadian financial-services company that distributes term life insurance, mutual funds and annuities, mortgages, debt-consolidation, auto and home insurance, pre-paid legal services and identity-theft protection to middle-income households through a large independent sales force. Primerica operates no public or partner API programme: as of 2026-09-14 there is no developer portal, no published OpenAPI, AsyncAPI, GraphQL, WSDL or Protobuf contract, no SDK on any package registry, no MCP server, no status page and no API pricing. What it does publish to the open internet is machine-readable identity infrastructure — anonymous OAuth 2.0 and OpenID Connect discovery documents for the two Okta identity orgs behind the MyPrimerica client portal and the Primerica Online representative portal, and for its own Broadcom/CA Layer7 API gateway at gtw.primericaonline.com — together with a published responsible-disclosure policy.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/primerica/refs/heads/main/apis.yml)
+**Areas:** Insurance · Financial Services · Life Insurance · Identity · Authentication · API Gateway
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Primerica on APIs.io
 
-## Tags:
+Everything profiled for Primerica is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/primerica/](https://apis.io/providers/primerica/)** — or go straight to one of the APIs or properties below.
 
- - Insurance, Financial Services, Life Insurance
+### APIs (1)
 
-## Timestamps
+- [Primerica API Gateway](https://apis.io/apis/primerica/primerica-api-gateway/) — Primerica's own API gateway (Broadcom/CA Layer7 — unmatched paths return a SOAP "Policy Falsified" fault in the layer7tech policy-fault namespace). It…
 
-- **Created:** 2026-04-19
-- **Modified:** 2026-04-19
+### Published properties
 
-## Maintainers
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**FN:** Kin Lane
+#### Security (3)
 
-**Email:** kin@apievangelist.com
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Primerica Authentication](https://apis.io/security/primerica/primerica-authentication/)
+- [Primerica Domain Security](https://apis.io/security/primerica/primerica-domain-security/)
+- [Primerica Vulnerability Disclosure](https://apis.io/security/primerica/primerica-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Primerica Scopes](https://apis.io/scopes/primerica/primerica-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Primerica Plans Pricing](https://apis.io/plans/primerica/primerica-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Primerica Rate Limits](https://apis.io/rate-limits/primerica/primerica-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Primerica Finops](https://apis.io/finops/primerica/primerica-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.primerica.com)
+- [Support](https://www.primerica.com/public/contact.html)
+- [Blog](https://www.primerica.com/public/news-insights.html)
+- [Security](https://www.primerica.com/public/privacy/primerica-responsible-disclosure-practice.html)
+- [Terms of service](https://www.primerica.com/public/terms_conditions.html)
+- [Privacy policy](https://www.primerica.com/public/privacy/privacy_notices.html)
+- [GitHub](https://github.com/Primerica)
+
+## API Evangelist rating
+
+**Kin Score 23.7** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 27.6 |
+
+**Agent readiness 17.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 42.1** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/primerica/](https://apis.io/providers/primerica/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Primerica: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/primerica/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
