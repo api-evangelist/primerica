@@ -133,6 +133,12 @@ common:
     url: rate-limits/primerica-rate-limits.yml
   - type: FinOps
     url: finops/primerica-finops.yml
+  - type: UsageTerms
+    url: terms/primerica-terms-of-service.yml
+  - type: DataProcessing
+    url: privacy/primerica-privacy-policy.yml
+  - type: DataLicense
+    url: data-license/primerica-data-license.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
